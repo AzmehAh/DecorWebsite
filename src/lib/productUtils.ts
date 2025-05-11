@@ -102,34 +102,10 @@ export async function fetchProducts(
   }
 }
 
-// Function to update a product in the database
-export async function updateProduct(
-  id: string, 
-  productData: Partial<Product>,
-  onSuccess?: () => void,
-  onError?: (message: string) => void
-) {
-  try {
-    const { data, error } = await supabase
-      .from("products")
-      .update(productData)
-      .eq("id", id)
-      .select();
-
-    if (error) throw error;
-    if (onSuccess) onSuccess();
-    return { success: true, data: data[0] as Product, message: "Product updated successfully" };
-  } catch (error: any) {
-    console.error("Error updating product:", error);
-    if (onError) onError(error.message || "Failed to update product");
-    return { success: false, data: null, message: error.message || "Failed to update product" };
-  }
-}
-
 // Improved function for updating product with packages
 export async function updateProduct(
   id: string,
-  selectedPackages: string[],
+  selectedPackages: string[] = [], // Make selectedPackages optional with default empty array
   productData: Partial<Product>,
   onSuccess?: () => void,
   onError?: (message: string) => void

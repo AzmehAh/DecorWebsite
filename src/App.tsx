@@ -3,10 +3,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useRoutes,
   useLocation,
 } from "react-router-dom";
-import routes from "tempo-routes";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import AdminLayout from "./components/layout/AdminLayout";
@@ -44,16 +42,6 @@ function App() {
     initAuth();
   }, []);
 
-  // Create a component to use routes within Router context
-  function TempoRoutes() {
-    try {
-      return useRoutes(routes);
-    } catch (error) {
-      console.error("Error in TempoRoutes:", error);
-      return null;
-    }
-  }
-
   // ScrollToTop component to reset scroll position on navigation
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -70,8 +58,6 @@ function App() {
       <Router>
         <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
-          {/* Tempo routes */}
-          {import.meta.env.VITE_TEMPO && <TempoRoutes />}
           <Routes>
             {/* Admin Routes - Protected by authentication */}
             <Route
@@ -98,9 +84,6 @@ function App() {
             />
 
             {/* Public Routes */}
-            {/* Allow Tempo to capture routes before the catchall */}
-            {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
-
             <Route
               path="/*"
               element={
