@@ -19,11 +19,13 @@ export default defineConfig({
       babel: {
         plugins: [...conditionalPlugins],
       },
+      // Ensure proper JSX runtime
+      jsxRuntime: "automatic",
     }),
     tempo(), // Add the tempo plugin
   ],
   optimizeDeps: {
-    exclude: ["lucide-react", "jspdf", "framer-motion", "core-js"], // Exclude problematic packages
+    exclude: ["lucide-react", "jspdf", "framer-motion"], // Exclude problematic packages
     esbuildOptions: {
       target: "es2020", // Use a more compatible target
       legalComments: "none", // Remove comments to reduce size
@@ -31,9 +33,9 @@ export default defineConfig({
     },
   },
   define: {
-    // Polyfill for require to fix core-js issues
-    require:
-      '((path) => { throw new Error("Dynamic require of " + path + " is not supported"); })',
+    // Replace dynamic require with a function that throws an error
+    "process.env.NODE_ENV": JSON.stringify("production"),
+    // Don't use a function for require, use a string that will throw an error
     global: "window",
   },
   resolve: {
@@ -52,8 +54,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Removed manualChunks option as it's incompatible with inlineDynamicImports
-        inlineDynamicImports: true, // Inline dynamic imports to reduce requests
+        inlineDynamicImports: false, // Changed to false to fix compatibility issues
       },
+      // Add external dependencies to avoid bundling issues
+      external: [],
     },
   },
   server: {
