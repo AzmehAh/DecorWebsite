@@ -12,7 +12,6 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/Home";
 import ProductDetailsNew from "./pages/ProductDetailsNew";
 import ProductsNew from "./pages/ProductsNew";
-import ProductDetails from "./pages/ProductDetails";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import ReferenceData from "./pages/admin/ReferenceData";
@@ -59,16 +58,17 @@ function App() {
         <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
           <Routes>
-            {/* Login Route - MOVED TO TOP LEVEL so it's accessible directly */}
+            {/* Login Route - Top level so it's accessible directly */}
             <Route path="/login" element={<Login />} />
             
             {/* Admin Routes - Protected by authentication */}
             <Route
-              path="/admin/*"
+              path="/admin"
               element={
                 <ProtectedRoute>
                   <AdminLayout>
                     <Routes>
+                      <Route index element={<ProductsAdmin />} />
                       <Route path="products" element={<ProductsAdmin />} />
                       <Route path="products/new" element={<ProductForm />} />
                       <Route
@@ -86,27 +86,46 @@ function App() {
               }
             />
 
-            {/* Public Routes */}
+            {/* Public Routes with Layout */}
             <Route
-              path="/*"
+              path="/"
               element={
                 <>
                   <Header />
                   <main className="pt-16">
                     <Routes>
-                      <Route path="/" element={<Home />} />
+                      <Route index element={<Home />} />
                       <Route path="products" element={<ProductsNew />} />
                       <Route
                         path="products/:id"
                         element={<ProductDetailsNew />}
                       />
                       <Route path="about" element={<About />} />
-                      {/* Login route was previously here - removed */}
                     </Routes>
                     <Footer />
                   </main>
                 </>
               }
+            />
+            
+            {/* Catch-all route for 404 - redirects to home */}
+            <Route 
+              path="*" 
+              element={
+                <>
+                  <Header />
+                  <main className="pt-16 py-20">
+                    <div className="container mx-auto text-center">
+                      <h1 className="text-3xl font-bold mb-4">Page Not Found</h1>
+                      <p className="mb-6">The page you're looking for doesn't exist.</p>
+                      <a href="/" className="inline-block bg-[#233054] text-white px-6 py-3 rounded-lg">
+                        Return to Home
+                      </a>
+                    </div>
+                    <Footer />
+                  </main>
+                </>
+              } 
             />
           </Routes>
         </div>

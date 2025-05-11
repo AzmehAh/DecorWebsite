@@ -15,14 +15,15 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer-when-downgrade"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Build settings
 [build]
   command = "npm run build"
   publish = "dist"
-
-# Handle 404 errors by redirecting to index.html
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+  
+# Development settings
+[dev]
+  command = "npm run dev"
+  port = 3000
+  publish = "dist"
