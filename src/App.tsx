@@ -59,6 +59,9 @@ function App() {
         <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
           <Routes>
+            {/* Login Route - MOVED TO TOP LEVEL so it's accessible directly */}
+            <Route path="/login" element={<Login />} />
+            
             {/* Admin Routes - Protected by authentication */}
             <Route
               path="/admin/*"
@@ -83,9 +86,6 @@ function App() {
               }
             />
 
-            {/* Login Route */}
-            <Route path="/login" element={<Login />} />
-
             {/* Public Routes */}
             <Route
               path="/*"
@@ -101,6 +101,7 @@ function App() {
                         element={<ProductDetailsNew />}
                       />
                       <Route path="about" element={<About />} />
+                      {/* Login route was previously here - removed */}
                     </Routes>
                     <Footer />
                   </main>
