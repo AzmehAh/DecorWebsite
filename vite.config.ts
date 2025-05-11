@@ -21,10 +21,14 @@ export default defineConfig({
       },
       // Ensure proper JSX runtime
       jsxRuntime: "automatic",
+      // Explicitly enable React Refresh
+      fastRefresh: true,
     }),
-    tempo(), // Add the tempo plugin
-  ],
+    // Only add tempo plugin if TEMPO env variable is true
+    process.env.TEMPO === "true" ? tempo() : null,
+  ].filter(Boolean), // Filter out null plugins
   optimizeDeps: {
+    include: ['vite'], // Include vite in dependencies to optimize
     exclude: ["lucide-react", "jspdf", "framer-motion"], // Exclude problematic packages
     esbuildOptions: {
       target: "es2020", // Use a more compatible target
