@@ -24,11 +24,6 @@ export async function fetchProducts(
   language: string,
   options: FilterOptions = {},
 ) {
-  // Set a longer timeout to prevent premature request failures
-  const timeoutPromise = new Promise((_, reject) => {
-    setTimeout(() => reject(new Error("Request timeout")), 30000);
-  });
-
   try {
     let query = supabase.from("products").select("*", { count: "exact" });
 
@@ -39,20 +34,12 @@ export async function fetchProducts(
 
       // Filter by application fields
       if (application_fields && application_fields.length > 0) {
-        // Create an OR condition for each application field
-        const appFieldConditions = application_fields.map(
-          (field) => `application_fields.eq.${field}`,
-        );
-        query = query.or(appFieldConditions.join(","));
+        query = query.eq('application_fields', application_fields[0]);
       }
 
       // Filter by surface types
       if (surface_types && surface_types.length > 0) {
-        // Create an OR condition for each surface type
-        const surfaceTypeConditions = surface_types.map(
-          (type) => `surface_types.eq.${type}`,
-        );
-        query = query.or(surfaceTypeConditions.join(","));
+        query = query.eq('surface_types', surface_types[0]);
       }
 
       // Filter by color
@@ -103,7 +90,7 @@ export async function fetchProducts(
     }
 
     // Execute query with timeout
-    const result = (await Promise.race([query, timeoutPromise])) as any;
+    const result = await query;
 
     return {
       data: result.data as Product[],
@@ -116,7 +103,12 @@ export async function fetchProducts(
 }
 
 // Function to update a product in the database
-export async function updateProduct(id: string, productData: Partial<Product>) {
+export async function updateProduct(
+  id: string, 
+  productData: Partial<Product>,
+  onSuccess?: () => void,
+  onError?: (message: string) => void
+) {
   try {
     const { data, error } = await supabase
       .from("products")
@@ -125,10 +117,70 @@ export async function updateProduct(id: string, productData: Partial<Product>) {
       .select();
 
     if (error) throw error;
-    return { data: data[0] as Product, error: null };
-  } catch (error) {
+    if (onSuccess) onSuccess();
+    return { success: true, data: data[0] as Product, message: "Product updated successfully" };
+  } catch (error: any) {
     console.error("Error updating product:", error);
-    return { data: null, error };
+    if (onError) onError(error.message || "Failed to update product");
+    return { success: false, data: null, message: error.message || "Failed to update product" };
+  }
+}
+
+// Improved function for updating product with packages
+export async function updateProduct(
+  id: string,
+  selectedPackages: string[],
+  productData: Partial<Product>,
+  onSuccess?: () => void,
+  onError?: (message: string) => void
+) {
+  try {
+    // Start a transaction using supabase
+    // First update the product
+    const { data: updatedProduct, error: productError } = await supabase
+      .from("products")
+      .update(productData)
+      .eq("id", id)
+      .select();
+
+    if (productError) throw productError;
+    
+    // Delete existing package links
+    const { error: deleteError } = await supabase
+      .from("product_packages")
+      .delete()
+      .eq("product_id", id);
+      
+    if (deleteError) throw deleteError;
+
+    // Add new package links if any packages selected
+    if (selectedPackages.length > 0) {
+      const packageLinks = selectedPackages.map((packageId) => ({
+        product_id: id,
+        package_id: packageId,
+      }));
+
+      const { error: insertError } = await supabase
+        .from("product_packages")
+        .insert(packageLinks);
+
+      if (insertError) throw insertError;
+    }
+
+    if (onSuccess) onSuccess();
+    return { 
+      success: true, 
+      data: updatedProduct?.[0] as Product, 
+      message: "Product updated successfully" 
+    };
+  } catch (error: any) {
+    console.error("Error updating product:", error);
+    if (onError) onError(error.message || "Failed to update product");
+    return { 
+      success: false, 
+      data: null, 
+      message: error.message || "Failed to update product" 
+    };
   }
 }
 
