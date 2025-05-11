@@ -83,6 +83,9 @@ function App() {
               }
             />
 
+            {/* Login Route */}
+            <Route path="/login" element={<Login />} />
+
             {/* Public Routes */}
             <Route
               path="/*"
@@ -98,7 +101,6 @@ function App() {
                         element={<ProductDetailsNew />}
                       />
                       <Route path="about" element={<About />} />
-                      <Route path="login" element={<Login />} />
                     </Routes>
                     <Footer />
                   </main>
