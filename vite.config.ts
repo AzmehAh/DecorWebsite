@@ -37,6 +37,8 @@ export default defineConfig({
           'ui': ['framer-motion', 'lucide-react'],
         }
       },
+      // Add tempo-routes to external to prevent build errors
+      external: ['tempo-routes']
     },
   },
   

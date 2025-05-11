@@ -147,12 +147,6 @@ export const ar = {
   },
   products: {
     title: "منتجاتنا",
-    filters: {
-      applicationFields: "مجالات التطبيق",
-      surfaceTypes: "أنواع الأسطح",
-      colors: "الألوان",
-      gloss: "اللمعان",
-    },
     featured: {
       title: "منتجاتنا",
       subtitle: "استكشف مجموعتنا",

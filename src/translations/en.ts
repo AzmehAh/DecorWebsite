@@ -147,12 +147,6 @@ export const en = {
   },
   products: {
     title: "Our Products",
-    filters: {
-      applicationFields: "Application Fields",
-      surfaceTypes: "Surface Types",
-      colors: "Colors",
-      gloss: "Gloss",
-    },
     featured: {
       title: "Our Products",
       subtitle: "EXPLORE OUR COLLECTION",
