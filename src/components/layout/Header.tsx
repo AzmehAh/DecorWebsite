@@ -99,12 +99,14 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* Contact link */}
+              {/* Contact link - Fixed by combining both onClick handlers */}
               <Link
                 to="/"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  scrollToContact(e);
+                }}
                 className="text-gray-600 hover:text-[#2b4796] font-medium"
-                onClick={scrollToContact}
               >
                 {t("nav.contact")}
               </Link>

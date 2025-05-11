@@ -51,7 +51,7 @@ export default defineConfig({
     assetsInlineLimit: 4096, // Inline small assets
     rollupOptions: {
       output: {
-        manualChunks: {}, // Disable manual chunks to reduce complexity
+        // Removed manualChunks option as it's incompatible with inlineDynamicImports
         inlineDynamicImports: true, // Inline dynamic imports to reduce requests
       },
     },
