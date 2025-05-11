@@ -8,10 +8,6 @@ if (process.env.TEMPO === "true") {
   conditionalPlugins.push("tempo-devtools/dist/babel-plugin");
 }
 
-// Set NODE_OPTIONS for minimal memory allocation to avoid bus error
-process.env.NODE_OPTIONS =
-  process.env.NODE_OPTIONS || "--max-old-space-size=512";
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -24,57 +20,72 @@ export default defineConfig({
       // Explicitly enable React Refresh
       fastRefresh: true,
     }),
-    // Only add tempo plugin if TEMPO env variable is true
+    // Only add tempo plugin when in development with TEMPO env var
     process.env.TEMPO === "true" ? tempo() : null,
   ].filter(Boolean), // Filter out null plugins
+  
   optimizeDeps: {
-    include: ['vite'], // Include vite in dependencies to optimize
+    include: ['react', 'react-dom', 'react-router-dom'], // Include core React packages
     exclude: ["lucide-react", "jspdf", "framer-motion"], // Exclude problematic packages
     esbuildOptions: {
-      target: "es2020", // Use a more compatible target
-      legalComments: "none", // Remove comments to reduce size
-      minify: true, // Minify during optimization
+      target: "es2020",
+      legalComments: "none",
+      minify: true,
     },
   },
+  
   define: {
-    // Replace dynamic require with a function that throws an error
-    "process.env.NODE_ENV": JSON.stringify("production"),
-    // Don't use a function for require, use a string that will throw an error
-    global: "window",
+    // Define environment explicitly
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production"),
+    "global": "window",
   },
+  
   resolve: {
     alias: {
       // Alias motion-dom to framer-motion to resolve dependency issues
       "motion-dom": "framer-motion",
     },
   },
+  
   build: {
-    sourcemap: false, // Disable sourcemaps to reduce memory usage
-    chunkSizeWarningLimit: 1000, // Increase chunk size warning limit
-    minify: "esbuild", // Use esbuild for minification (less memory intensive)
-    target: "es2018", // Older target for better compatibility
-    cssCodeSplit: false, // Combine CSS into single file
-    assetsInlineLimit: 4096, // Inline small assets
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+    minify: "esbuild",
+    target: "es2018",
+    cssCodeSplit: false,
+    assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
-        // Removed manualChunks option as it's incompatible with inlineDynamicImports
-        inlineDynamicImports: false, // Changed to false to fix compatibility issues
+        // Avoid inlining dynamic imports to prevent refresh issues
+        inlineDynamicImports: false,
+        // Ensure proper code splitting
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // Group common packages together
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer';
+            }
+            return 'vendor';
+          }
+        }
       },
-      // Add external dependencies to avoid bundling issues
-      external: [],
     },
   },
+  
   server: {
     // @ts-ignore
     allowedHosts: process.env.TEMPO === "true" ? true : undefined,
     hmr: {
-      overlay: false, // Disable error overlay to reduce memory usage
+      overlay: true, // Re-enable overlay for better debugging
     },
     watch: {
-      usePolling: false, // Disable polling to reduce CPU usage
+      usePolling: false,
     },
     fs: {
-      strict: false, // Less strict file system checks
+      strict: false,
     },
   },
 });

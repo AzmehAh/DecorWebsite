@@ -75,18 +75,12 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        {/* Language Switch button immediately after Contact */}
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              {/* ... other menu items ... */}
-              <LanguageSwitch /> {/* Now only appears when menu is open */}
-            </div>
-          </div>
-        )}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-4">
+              {/* Language Switch button */}
+              <LanguageSwitch />
+              
               {/* Render regular menu items */}
               {menuItems.map((item) => (
                 <Link
@@ -99,7 +93,7 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* Contact link - Fixed by combining both onClick handlers */}
+              {/* Contact link - fixed combined event handler */}
               <Link
                 to="/"
                 onClick={(e) => {
