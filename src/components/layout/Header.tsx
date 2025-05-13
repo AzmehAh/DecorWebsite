@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "../ui/Logo";
 import LanguageSwitch from "../ui/LanguageSwitch";
@@ -8,11 +8,24 @@ import { useLanguage } from "../../contexts/LanguageContext";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useLanguage();
 
   const scrollToContact = (e: React.MouseEvent) => {
-    if (location.pathname === "/") {
-      e.preventDefault();
+    e.preventDefault();
+    
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Use setTimeout to wait for the page to load before scrolling
+      setTimeout(() => {
+        const contactSection = document.querySelector("#contact-section");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // We're already on the home page, just scroll
       const contactSection = document.querySelector("#contact-section");
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: "smooth" });
@@ -49,13 +62,13 @@ export default function Header() {
             ))}
 
             {/* Contact link */}
-            <Link
-              to="/"
+            <a
+              href="/#contact-section"
               onClick={scrollToContact}
               className="font-bold text-[#233054] tracking-wide hover:text-[#2b4796]"
             >
               {t("nav.contact")}
-            </Link>
+            </a>
 
             {/* Language Switch button immediately after Contact */}
             <LanguageSwitch />
@@ -94,8 +107,8 @@ export default function Header() {
               ))}
 
               {/* Contact link - fixed combined event handler */}
-              <Link
-                to="/"
+              <a
+                href="/#contact-section"
                 onClick={(e) => {
                   setIsMenuOpen(false);
                   scrollToContact(e);
@@ -103,7 +116,7 @@ export default function Header() {
                 className="text-gray-600 hover:text-[#2b4796] font-medium"
               >
                 {t("nav.contact")}
-              </Link>
+              </a>
             </div>
           </div>
         )}
