@@ -279,7 +279,7 @@ export default function ProductDetailsNew() {
                     "https://ueaiiwmblxyqsflvnzir.supabase.co/storage/v1/object/public/image//decore4.jfif"
                   }
                   alt={product.name}
-                  className="w-full h-[400px] object-contain"
+                  className="w-full h-[400px] object-cover"
                 />
               </div>
             </div>
