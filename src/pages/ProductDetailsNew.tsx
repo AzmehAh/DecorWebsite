@@ -26,7 +26,7 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: "details", titleKey: "productDetails.features", icon: Shield },
+  { id: "details", titleKey: "productDetails.productdetailssectionname", icon: Shield },
   {
     id: "specifications",
     titleKey: "productDetails.technicalInfo.title",
