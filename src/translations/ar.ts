@@ -20,6 +20,7 @@ export const ar = {
     gloss: "اللمعان",
     availableSizes: "العبوات المتوفرة",
     note: "ملاحظة",
+    productdetailssectionname:"المواصفات",
     features: "المميزات",
     notice: "تنبيه",
     applicationMethod: "طريقة الاستخدام",
