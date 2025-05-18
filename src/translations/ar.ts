@@ -47,8 +47,8 @@ export const ar = {
     },
     dryingTime: {
       title: "وقت الجفاف",
-      touch: "جاف للمس",
-      handle: "جاف للتعامل",
+      touch: "الجفاف الأولي",
+      handle: "الجفاف النهائي",
       topcoat: "جاف للطبقة التالية",
       complete: "الجفاف التام",
     },
