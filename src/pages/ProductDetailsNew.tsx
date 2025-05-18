@@ -687,7 +687,7 @@ export default function ProductDetailsNew() {
                                       {" "}
                                     </span>
                                     <span className="text-gray-600">
-                                      {" "}
+                                      {"  "}
                                       {product.dry_to_topcoat}
                                     </span>
                                   </div>
