@@ -42,7 +42,7 @@ export const en = {
       filmThickness: "Film Thickness",
       spreadingRate: "Spreading Rate",
       specificGravity: "Specific Gravity",
-      recommendedUses: "recommended uses",
+      recommendedUses: "Recommended uses",
       waterResistance: "Water Resistance",
     },
     dryingTime: {
