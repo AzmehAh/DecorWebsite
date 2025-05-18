@@ -686,6 +686,7 @@ export default function ProductDetailsNew() {
                                       {t("productDetails.dryingTime.topcoat")}:
                                     </span>
                                     <span className="text-gray-600">
+                                      {" "}
                                       {product.dry_to_topcoat}
                                     </span>
                                   </div>
@@ -696,6 +697,7 @@ export default function ProductDetailsNew() {
                                       {t("productDetails.dryingTime.complete")}:
                                     </span>
                                     <span className="text-gray-600">
+                                      {" "}
                                       {product.complete_setting}
                                     </span>
                                   </div>
@@ -706,6 +708,7 @@ export default function ProductDetailsNew() {
                                       {t("productDetails.note")}:
                                     </span>
                                     <span className="text-gray-600">
+                                      {" "}
                                       {product.note}
                                     </span>
                                   </div>
