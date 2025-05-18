@@ -16,10 +16,10 @@ export const en = {
     errorGeneratingPDF: "Error generating PDF. Please try again.",
   },
   productDetails: {
-    color: "color",
-    gloss: "gloss",
+    color: "Color",
+    gloss: "Gloss",
     availableSizes: "Available Packages",
-    note: "note",
+    note: "Notes",
     features: "Features",
     notice: "Notice",
     applicationMethod: "Application Method",
@@ -29,7 +29,7 @@ export const en = {
     thinner: "Thinner",
     surfacePreparation: "Surface Preparation",
     technicalInfo: {
-      numberOfCoats: "number Of Coats",
+      numberOfCoats: "Number Of Coats",
       title: "Technical Information",
       color: "Color",
       gloss: "Gloss",
