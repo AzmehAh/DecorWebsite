@@ -20,7 +20,7 @@ export const en = {
     gloss: "Gloss",
     availableSizes: "Available Packages",
     note: "Notes",
-    features: "Features",
+    features: "Product Details",
     notice: "Notice",
     applicationMethod: "Application Method",
     applicationTemperatures: "Application Temperatures",
