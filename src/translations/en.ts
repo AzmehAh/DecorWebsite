@@ -187,7 +187,7 @@ export const en = {
     tagline: "Trust Décor to exceed your expectations",
     phone: "0930429893",
     email: "info@decorpaints.co",
-    address: "Tajheez, Damascus, Syria",
+    address: "Baramke, Damascus, Syria",
     businessHours: "Business Hours",
     workingDays: "Saturday - Thursday: 9:00 AM - 5:00 PM",
     weekend: "Friday: Closed",
