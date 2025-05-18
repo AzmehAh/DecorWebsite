@@ -92,6 +92,13 @@ function ProductsNew() {
     colors: true,
     gloss: true,
   });
+  // Track which filter categories have associated products
+  const [activeFilterCategories, setActiveFilterCategories] = useState<Record<string, boolean>>({
+    applicationFields: false,
+    surfaceTypes: false,
+    colors: false,
+    gloss: false,
+  });
 
   // Fetch filter data on component mount or when language changes
   useEffect(() => {
@@ -170,9 +177,11 @@ function ProductsNew() {
       console.log("Fetching unique color and gloss values from products");
 
       // Fetch unique color and gloss values from products
-      const [uniqueColors, uniqueGloss] = await Promise.all([
+      const [uniqueColors, uniqueGloss, uniqueApplicationFields, uniqueSurfaceTypes] = await Promise.all([
         fetchUniqueProductValues("color"),
         fetchUniqueProductValues("gloss"),
+        fetchUniqueProductValues("application_fields"),
+        fetchUniqueProductValues("surface_types"),
       ]);
 
       // Process color values from products
@@ -199,16 +208,36 @@ function ProductsNew() {
       const mergedGlossOptions =
         glossOptions.length > 0 ? glossOptions : productGlossOptions;
 
+      // Filter application fields and surface types that are actually used in products
+      const usedApplicationFieldIds = new Set(uniqueApplicationFields.map(field => field));
+      const usedSurfaceTypeIds = new Set(uniqueSurfaceTypes.map(type => type));
+      
+      const filteredApplicationFields = applicationFieldsData?.filter(field => 
+        usedApplicationFieldIds.has(field.id)
+      ) || [];
+      
+      const filteredSurfaceTypes = surfaceTypesData?.filter(type => 
+        usedSurfaceTypeIds.has(type.id)
+      ) || [];
+
       setFilterCategories({
-        applicationFields: applicationFieldsData || [],
-        surfaceTypes: surfaceTypesData || [],
+        applicationFields: filteredApplicationFields,
+        surfaceTypes: filteredSurfaceTypes,
         colors: mergedColorOptions,
         gloss: mergedGlossOptions,
       });
 
+      // Set active filter categories based on whether there are any options
+      setActiveFilterCategories({
+        applicationFields: filteredApplicationFields.length > 0,
+        surfaceTypes: filteredSurfaceTypes.length > 0,
+        colors: mergedColorOptions.length > 0,
+        gloss: mergedGlossOptions.length > 0,
+      });
+
       console.log("Filter data loaded:", {
-        applicationFields: applicationFieldsData?.length || 0,
-        surfaceTypes: surfaceTypesData?.length || 0,
+        applicationFields: filteredApplicationFields.length,
+        surfaceTypes: filteredSurfaceTypes.length,
         colors: mergedColorOptions.length,
         gloss: mergedGlossOptions.length,
       });
@@ -426,30 +455,38 @@ function ProductsNew() {
                 )}
               </div>
               <div className="space-y-1">
-                <FilterSection
-                  title={t("products.filters.applicationFields")}
-                  category="applicationFields"
-                  options={filterCategories.applicationFields}
-                  loading={filtersLoading}
-                />
-                <FilterSection
-                  title={t("products.filters.surfaceTypes")}
-                  category="surfaceTypes"
-                  options={filterCategories.surfaceTypes}
-                  loading={filtersLoading}
-                />
-                <FilterSection
-                  title={t("products.filters.colors")}
-                  category="colors"
-                  options={filterCategories.colors}
-                  loading={filtersLoading}
-                />
-                <FilterSection
-                  title={t("products.filters.gloss")}
-                  category="gloss"
-                  options={filterCategories.gloss}
-                  loading={filtersLoading}
-                />
+                {activeFilterCategories.applicationFields && (
+                  <FilterSection
+                    title={t("products.filters.applicationFields")}
+                    category="applicationFields"
+                    options={filterCategories.applicationFields}
+                    loading={filtersLoading}
+                  />
+                )}
+                {activeFilterCategories.surfaceTypes && (
+                  <FilterSection
+                    title={t("products.filters.surfaceTypes")}
+                    category="surfaceTypes"
+                    options={filterCategories.surfaceTypes}
+                    loading={filtersLoading}
+                  />
+                )}
+                {activeFilterCategories.colors && (
+                  <FilterSection
+                    title={t("products.filters.colors")}
+                    category="colors"
+                    options={filterCategories.colors}
+                    loading={filtersLoading}
+                  />
+                )}
+                {activeFilterCategories.gloss && (
+                  <FilterSection
+                    title={t("products.filters.gloss")}
+                    category="gloss"
+                    options={filterCategories.gloss}
+                    loading={filtersLoading}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -485,30 +522,38 @@ function ProductsNew() {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                   </div>
                   <div className="space-y-1">
-                    <FilterSection
-                      title={t("products.filters.applicationFields")}
-                      category="applicationFields"
-                      options={filterCategories.applicationFields}
-                      loading={filtersLoading}
-                    />
-                    <FilterSection
-                      title={t("products.filters.surfaceTypes")}
-                      category="surfaceTypes"
-                      options={filterCategories.surfaceTypes}
-                      loading={filtersLoading}
-                    />
-                    <FilterSection
-                      title={t("products.filters.colors")}
-                      category="colors"
-                      options={filterCategories.colors}
-                      loading={filtersLoading}
-                    />
-                    <FilterSection
-                      title={t("products.filters.gloss")}
-                      category="gloss"
-                      options={filterCategories.gloss}
-                      loading={filtersLoading}
-                    />
+                    {activeFilterCategories.applicationFields && (
+                      <FilterSection
+                        title={t("products.filters.applicationFields")}
+                        category="applicationFields"
+                        options={filterCategories.applicationFields}
+                        loading={filtersLoading}
+                      />
+                    )}
+                    {activeFilterCategories.surfaceTypes && (
+                      <FilterSection
+                        title={t("products.filters.surfaceTypes")}
+                        category="surfaceTypes"
+                        options={filterCategories.surfaceTypes}
+                        loading={filtersLoading}
+                      />
+                    )}
+                    {activeFilterCategories.colors && (
+                      <FilterSection
+                        title={t("products.filters.colors")}
+                        category="colors"
+                        options={filterCategories.colors}
+                        loading={filtersLoading}
+                      />
+                    )}
+                    {activeFilterCategories.gloss && (
+                      <FilterSection
+                        title={t("products.filters.gloss")}
+                        category="gloss"
+                        options={filterCategories.gloss}
+                        loading={filtersLoading}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
