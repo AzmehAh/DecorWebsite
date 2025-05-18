@@ -58,7 +58,6 @@ interface FilterOption {
 interface FilterCategories {
   applicationFields: ApplicationField[];
   surfaceTypes: SurfaceType[];
-  colors: FilterOption[];
   gloss: FilterOption[];
 }
 
@@ -81,7 +80,6 @@ function ProductsNew() {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({
     application_fields: [],
     surface_types: [],
-    color: [],
     gloss: [],
   });
   const [expandedSections, setExpandedSections] = useState<
@@ -89,14 +87,12 @@ function ProductsNew() {
   >({
     applicationFields: true,
     surfaceTypes: true,
-    colors: true,
     gloss: true,
   });
   // Track which filter categories have associated products
   const [activeFilterCategories, setActiveFilterCategories] = useState<Record<string, boolean>>({
     applicationFields: false,
     surfaceTypes: false,
-    colors: false,
     gloss: false,
   });
 
@@ -133,33 +129,18 @@ function ProductsNew() {
       const [
         { data: applicationFieldsData },
         { data: surfaceTypesData },
-        { data: colorTypesData },
         { data: glossTypesData },
       ] = await Promise.all([
         supabase.from("application_fields").select("*").order("name"),
         supabase.from("surface_types").select("*").order("name"),
-        supabase.from("color_types").select("*").order("name"),
         supabase.from("gloss_types").select("*").order("name"),
       ]);
 
       console.log("Filter data fetched:", {
         applicationFields: applicationFieldsData?.length || 0,
         surfaceTypes: surfaceTypesData?.length || 0,
-        colorTypes: colorTypesData?.length || 0,
         glossTypes: glossTypesData?.length || 0,
       });
-
-      // Transform color types into filter options
-      const colorOptions: FilterOption[] = colorTypesData
-        ? colorTypesData.map((color) => ({
-            id: color.name.toLowerCase(),
-            name: color.name,
-            name_ar:
-              color.name_ar ||
-              colorTranslations[color.name.toLowerCase()] ||
-              color.name,
-          }))
-        : [];
 
       // Transform gloss types into filter options
       const glossOptions: FilterOption[] = glossTypesData
@@ -177,21 +158,11 @@ function ProductsNew() {
       console.log("Fetching unique color and gloss values from products");
 
       // Fetch unique color and gloss values from products
-      const [uniqueColors, uniqueGloss, uniqueApplicationFields, uniqueSurfaceTypes] = await Promise.all([
-        fetchUniqueProductValues("color"),
+      const [uniqueGloss, uniqueApplicationFields, uniqueSurfaceTypes] = await Promise.all([
         fetchUniqueProductValues("gloss"),
         fetchUniqueProductValues("application_fields"),
         fetchUniqueProductValues("surface_types"),
       ]);
-
-      // Process color values from products
-      const productColorOptions: FilterOption[] = uniqueColors
-        .filter((color) => typeof color === "string" && color.trim() !== "")
-        .map((color) => ({
-          id: color.toLowerCase(),
-          name: color,
-          name_ar: colorTranslations[color.toLowerCase()] || color,
-        }));
 
       // Process gloss values from products
       const productGlossOptions: FilterOption[] = uniqueGloss
@@ -203,8 +174,6 @@ function ProductsNew() {
         }));
 
       // Merge options from tables and products, prioritizing table data
-      const mergedColorOptions =
-        colorOptions.length > 0 ? colorOptions : productColorOptions;
       const mergedGlossOptions =
         glossOptions.length > 0 ? glossOptions : productGlossOptions;
 
@@ -223,7 +192,6 @@ function ProductsNew() {
       setFilterCategories({
         applicationFields: filteredApplicationFields,
         surfaceTypes: filteredSurfaceTypes,
-        colors: mergedColorOptions,
         gloss: mergedGlossOptions,
       });
 
@@ -231,14 +199,12 @@ function ProductsNew() {
       setActiveFilterCategories({
         applicationFields: filteredApplicationFields.length > 0,
         surfaceTypes: filteredSurfaceTypes.length > 0,
-        colors: mergedColorOptions.length > 0,
         gloss: mergedGlossOptions.length > 0,
       });
 
       console.log("Filter data loaded:", {
         applicationFields: filteredApplicationFields.length,
         surfaceTypes: filteredSurfaceTypes.length,
-        colors: mergedColorOptions.length,
         gloss: mergedGlossOptions.length,
       });
     } catch (err) {
@@ -468,14 +434,6 @@ function ProductsNew() {
                     title={t("products.filters.surfaceTypes")}
                     category="surfaceTypes"
                     options={filterCategories.surfaceTypes}
-                    loading={filtersLoading}
-                  />
-                )}
-                {activeFilterCategories.colors && (
-                  <FilterSection
-                    title={t("products.filters.colors")}
-                    category="colors"
-                    options={filterCategories.colors}
                     loading={filtersLoading}
                   />
                 )}
