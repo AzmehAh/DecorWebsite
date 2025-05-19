@@ -18,7 +18,7 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#233054] text-lg text-white leading-relaxed font-light">
+    <footer className="bg-[#233054] text-base text-white leading-relaxed font-light">
       <div className="container mx-auto px-20 py-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
           {/* About Us */}
@@ -26,13 +26,13 @@ export default function Footer() {
             <Link to="/" className="inline-block mb-6">
               <Logo className="h-10 w-auto" color="#ffffff" />
             </Link>
-            <p className="text-lg text-white leading-relaxed font-light mb-4">
+            <p className="text-base text-white leading-relaxed font-light mb-4">
               {t("footer.tagline")}
             </p>
             <div className="flex gap-4">
               <a
                 href="https://www.facebook.com/share/1BRS8Aucho/"
-                className="text-lg text-white leading-relaxed font-light hover:fill-[#4267B2] rounded-full transition-colors"
+                className="text-base text-white leading-relaxed font-light hover:fill-[#4267B2] rounded-full transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -41,7 +41,7 @@ export default function Footer() {
 
               <a
                 href="https://www.instagram.com/decorpaintsofficial?igsh=b3VjMGJucGJqeHdk"
-                className="group text-lg text-white leading-relaxed font-light transition-colors"
+                className="group text-base text-white leading-relaxed font-light transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -67,7 +67,7 @@ export default function Footer() {
               </a>
               <a
                 href="https://wa.me/message/VWCKRVH3KTNEO1"
-                className="text-lg text-white leading-relaxed font-light hover:fill-[#25D366] rounded-full transition-colors"
+                className="text-base text-white leading-relaxed font-light hover:fill-[#25D366] rounded-full transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -78,13 +78,13 @@ export default function Footer() {
 
           {/* Important Pages */}
           <div className="md:col-span-3">
-            <h3 className="text-white text-lg font-medium mb-6">
+            <h3 className="text-white text-base font-medium mb-6">
               {t("footer.importantPages")}
             </h3>
             <div className="space-y-4">
               <Link
                 to="/products"
-                className="flex items-center group text-lg text-white leading-relaxed font-light hover:text-white transition-colors"
+                className="flex items-center group text-base text-white leading-relaxed font-light hover:text-white transition-colors"
               >
                 <span>{t("nav.products")}</span>
                 <ArrowUpRight className="ml-1 h-4 w-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -108,7 +108,7 @@ export default function Footer() {
 
           {/* Contact Information */}
           <div className="md:col-span-3">
-            <h3 className="text-white text-lg font-medium mb-6">
+            <h3 className="text-white text-base font-medium mb-6">
               {t("footer.contact")}
             </h3>
             <div className="space-y-4 break-words">
@@ -142,7 +142,7 @@ export default function Footer() {
 
           {/* Business Hours */}
           <div className="md:col-span-3">
-            <h3 className="text-white text-lg font-medium mb-6">
+            <h3 className="text-white text-base font-medium mb-6">
               {t("footer.businessHours")}
             </h3>
             <div className="space-y-3">
