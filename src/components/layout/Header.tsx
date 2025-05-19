@@ -45,7 +45,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Logo className="h-10 w-auto transition-transform hover:scale-105" />
+            <Logo className="h-12 w-auto transition-transform hover:scale-105" />
           </Link>
 
           {/* Desktop Menu */}
