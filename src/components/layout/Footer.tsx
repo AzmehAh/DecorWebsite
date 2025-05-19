@@ -24,7 +24,7 @@ export default function Footer() {
           {/* About Us */}
           <div className="md:col-span-3">
             <Link to="/" className="inline-block mb-6">
-              <Logo className="h-10 w-auto" color="#ffffff" />
+              <Logo className="h-16 w-auto" color="#ffffff" />
             </Link>
             <p className="text-base text-white leading-relaxed font-light mb-4">
               {t("footer.tagline")}
