@@ -153,7 +153,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright and Links */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white">
+        <div className="flex flex-col md:flex-row justify-center items-center text-sm text-white">
           <p className="text-white">
             © {currentYear} {t("footer.copyright")}
           </p>
