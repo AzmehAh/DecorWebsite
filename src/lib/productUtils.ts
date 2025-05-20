@@ -111,11 +111,14 @@ export async function updateProduct(
   onError?: (message: string) => void
 ) {
   try {
+    // Remove any packages property from productData if it exists
+    const { packages, ...cleanProductData } = productData as any;
+
     // Start a transaction using supabase
     // First update the product
     const { data: updatedProduct, error: productError } = await supabase
       .from("products")
-      .update(productData)
+      .update(cleanProductData)
       .eq("id", id)
       .select();
 
