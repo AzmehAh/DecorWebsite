@@ -731,7 +731,7 @@ export default function ProductForm() {
 
     {/* Adhesion */}
     <FormField
-      label="adhesion"
+      label="Adhesion"
       name="adhesion"
       value={product.adhesion}
       onChange={handleChange}
