@@ -348,8 +348,7 @@ export default function ProductForm() {
       </div>
     );
   }
-
-  return (
+ return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         <div className="mb-8 flex items-center justify-between">
@@ -394,87 +393,95 @@ export default function ProductForm() {
         </AnimatePresence>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <FormSection title="Basic Information" icon={Paintbrush}>
-            <div className="grid grid-cols-1 gap-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Languages className="h-5 w-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-700">
-                  English
-                </span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FormField
-                  label="Name"
-                  name="name"
-                  value={product.name}
-                  onChange={handleChange}
-                  required
-                />
-                <FormField
-                  label="Price"
-                  name="price"
-                  type="number"
-                  value={product.price}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <FormField
-                label="Description"
-                name="description"
-                value={product.description}
-                onChange={handleChange}
-                multiline
-              />
-              <FormField
-                label="Features"
-                name="features"
-                value={product.features}
-                onChange={handleChange}
-                multiline
-              />
+         <FormSection title="Basic Information" icon={Paintbrush}>
+  <div className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        label="Name"
+        name="name"
+        value={product.name}
+        onChange={handleChange}
+      />
+      <FormField
+        label="الاسم"
+        name="name_ar"
+        value={product.name_ar}
+        onChange={handleChange}
+        dir="rtl"
+        inputClassName="text-right"
+      />
+    </div>
 
-              <div className="mt-6 pt-6 border-t">
-                <div className="flex items-center gap-2 mb-2">
-                  <Languages className="h-5 w-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    Arabic (العربية)
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 gap-4">
-                  <FormField
-                    label="Name (الاسم)"
-                    name="name_ar"
-                    value={product.name_ar}
-                    onChange={handleChange}
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Description (الوصف)"
-                    name="description_ar"
-                    value={product.description_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Features (المميزات)"
-                    name="features_ar"
-                    value={product.features_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                </div>
-              </div>
-            </div>
-            <FormField
-              label="Image URL"
-              name="image_url"
-              value={product.image_url}
-              onChange={handleChange}
-            />
-          </FormSection>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        label="Price"
+        name="price"
+        type="number"
+        value={product.price}
+        onChange={handleChange}
+      />
+      <FormField
+        label="السعر"
+        name="price_ar"
+        type="number"
+        value={product.price_ar || ''}
+        onChange={handleChange}
+        dir="rtl"
+        inputClassName="text-right"
+      />
+    </div>
+
+    {/* الوصف */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        label="Description"
+        name="description"
+        value={product.description}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="الوصف"
+        name="description_ar"
+        value={product.description_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
+    </div>
+
+    {/* المميزات */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        label="Features"
+        name="features"
+        value={product.features}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="المميزات"
+        name="features_ar"
+        value={product.features_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
+    </div>
+
+    <div>
+      <FormField
+        label="Image URL"
+        name="image_url"
+        value={product.image_url}
+        onChange={handleChange}
+      />
+    </div>
+  </div>
+</FormSection>
+
 
           <FormSection title="Brand & Packaging" icon={Building2}>
             <FormField
@@ -521,355 +528,385 @@ export default function ProductForm() {
           </FormSection>
 
           <FormSection title="Application Details" icon={Beaker}>
-            <div className="space-y-6">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Languages className="h-5 w-5 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    English
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormField
-                    label="Method of Application"
-                    name="method_of_application"
-                    value={product.method_of_application}
-                    onChange={handleChange}
-                    multiline
-                  />
-                  <FormField
-                    label="Mixing Instructions"
-                    name="mixing"
-                    value={product.mixing}
-                    onChange={handleChange}
-                    multiline
-                  />
-                  <FormField
-                    label="Thinner"
-                    name="thinner"
-                    value={product.thinner}
-                    onChange={handleChange}
-                    multiline
-                  />
-                  <FormField
-                    label="Application Temperature"
-                    name="application_temperatures"
-                    value={product.application_temperatures}
-                    onChange={handleChange}
-                    multiline
-                  />
-                  <FormField
-                    label="Application Note"
-                    name="application_note"
-                    value={product.application_note}
-                    onChange={handleChange}
-                    multiline
-                  />
-                </div>
-              </div>
+  <div className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        label="Method of Application"
+        name="method_of_application"
+        value={product.method_of_application}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="أداة الاستخدام"
+        name="method_of_application_ar"
+        value={product.method_of_application_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
 
-              <div className="pt-6 border-t">
-                <div className="flex items-center gap-2 mb-2">
-                  <Languages className="h-5 w-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    Arabic (العربية)
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormField
-                    label="Method of Application ( أداة الاستخدام)"
-                    name="method_of_application_ar"
-                    value={product.method_of_application_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Mixing Instructions (طريقة المزج )"
-                    name="mixing_ar"
-                    value={product.mixing_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Thinner (المذيب / المنظف)"
-                    name="thinner_ar"
-                    value={product.thinner_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Application Temperature (درجة الحرارة أثناء التنفيذ)"
-                    name="application_temperatures_ar"
-                    value={product.application_temperatures_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="Application Note (ملاحظات التطبيق)"
-                    name="application_note_ar"
-                    value={product.application_note_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                </div>
-              </div>
-            </div>
-          </FormSection>
+      {/* Mixing Instructions */}
+      <FormField
+        label="Mixing Instructions"
+        name="mixing"
+        value={product.mixing}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="طريقة المزج"
+        name="mixing_ar"
+        value={product.mixing_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
 
-          <FormSection title="Technical Specifications" icon={Shield}>
-            <div className="flex items-center gap-2 mb-2">
-              <Languages className="h-5 w-5 text-green-600" />
-              <span className="text-sm font-medium text-gray-700">
-                Arabic (العربية)
-              </span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                label="Color (لون)"
-                name="color_ar"
-                value={product.color_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Gloss (لمعان)"
-                name="gloss_ar"
-                value={product.gloss_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Volume Solids (لمحتوى من المواد الصلبة )"
-                name="volume_solids_ar"
-                value={product.volume_solids_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="VOC ( المحتوى من المركبات العضوية المتطايرة)"
-                name="voc_ar"
-                value={product.voc_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Number of Coats ( عدد أوجه الطلاء)"
-                name="number_of_coats_ar"
-                type="text"
-                value={product.number_of_coats_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Water Resistance (مقاومة الماء)"
-                name="water_resistance_ar"
-                value={product.water_resistance_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="flexibility (المرونة)"
-                name="flexibility_ar"
-                value={product.flexibility_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="adhesion  (شدة الالتصاق)"
-                name="adhesion_ar"
-                value={product.adhesion_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Washability (قابلية الغسل)"
-                name="washability_ar"
-                value={product.washability_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="Abrasion Resistance (مقاومة التآكل)"
-                name="abrasion_resistance_ar"
-                value={product.abrasion_resistance_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="recommended_film_thickness (سماكة الفيلم المقترحة)"
-                name="recommended_film_thickness_ar"
-                value={product.recommended_film_thickness_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="theoretical_spreading_rate (معدل التغطية النظري )"
-                name="theoretical_spreading_rate_ar"
-                type="number"
-                value={product.theoretical_spreading_rate_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
+      {/* Thinner */}
+      <FormField
+        label="Thinner"
+        name="thinner"
+        value={product.thinner}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="المذيب / المنظف"
+        name="thinner_ar"
+        value={product.thinner_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
 
-              <FormField
-                label="specific_gravity (الكثافة بعد المزج)"
-                name="specific_gravity_ar"
-                value={product.specific_gravity_ar}
-                onChange={handleChange}
-                dir="rtl"
-              />
-              <FormField
-                label="surface_preparation (تحضير السطح)"
-                name="surface_preparation_ar"
-                value={product.surface_preparation_ar}
-                onChange={handleChange}
-                multiline
-                dir="rtl"
-              />
-            </div>
-          </FormSection>
-          <FormSection title="Technical Specifications" icon={Shield}>
-            <div className="flex items-center gap-2 mb-2">
-              <Languages className="h-5 w-5 text-blue-600" />
-              <span className="text-sm font-medium text-gray-700">English</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                label="Color"
-                name="color"
-                value={product.color}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Gloss"
-                name="gloss"
-                value={product.gloss}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Volume Solids"
-                name="volume_solids"
-                value={product.volume_solids}
-                onChange={handleChange}
-              />
-              <FormField
-                label="VOC"
-                name="voc"
-                value={product.voc}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Number of Coats"
-                name="number_of_coats"
-                type="text"
-                value={product.number_of_coats}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Water Resistance"
-                name="water_resistance"
-                value={product.water_resistance}
-                onChange={handleChange}
-              />
-              <FormField
-                label="flexibility"
-                name="flexibility"
-                value={product.flexibility}
-                onChange={handleChange}
-              />
-              <FormField
-                label="adhesion"
-                name="adhesion"
-                value={product.adhesion}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Washability"
-                name="washability"
-                value={product.washability}
-                onChange={handleChange}
-              />
-              <FormField
-                label="Abrasion Resistance"
-                name="abrasion_resistance"
-                value={product.abrasion_resistance}
-                onChange={handleChange}
-              />
-              <FormField
-                label="recommended_film_thickness"
-                name="recommended_film_thickness"
-                value={product.recommended_film_thickness}
-                onChange={handleChange}
-              />
-              <FormField
-                label="theoretical_spreading_rate"
-                name="theoretical_spreading_rate"
-                type="number"
-                value={product.theoretical_spreading_rate}
-                onChange={handleChange}
-              />
+      {/* Application Temperature */}
+      <FormField
+        label="Application Temperature"
+        name="application_temperatures"
+        value={product.application_temperatures}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="درجة الحرارة أثناء التنفيذ"
+        name="application_temperatures_ar"
+        value={product.application_temperatures_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
 
-              <FormField
-                label="specific_gravity"
-                name="specific_gravity"
-                value={product.specific_gravity}
-                onChange={handleChange}
-              />
-              <FormField
-                label="surface_preparation"
-                name="surface_preparation"
-                value={product.surface_preparation}
-                onChange={handleChange}
-                multiline
-              />
-              <FormField
-                label="application_fields"
-                name="application_fields"
-                type="select"
-                value={product.application_fields}
-                onChange={handleChange}
-                required
-                options={applicationFields}
-              />
-              <FormField
-                label="surface_types"
-                name="surface_types"
-                type="select"
-                value={product.surface_types}
-                onChange={handleChange}
-                required
-                options={surface_types}
-              />
-            </div>
-          </FormSection>
+      {/* Application Note */}
+      <FormField
+        label="Application Note"
+        name="application_note"
+        value={product.application_note}
+        onChange={handleChange}
+        multiline
+      />
+      <FormField
+        label="ملاحظات التطبيق"
+        name="application_note_ar"
+        value={product.application_note_ar}
+        onChange={handleChange}
+        multiline
+        dir="rtl"
+        inputClassName="text-right"
+      />
+    </div>
+  </div>
+</FormSection>
+
+
+         <FormSection title="Technical Specifications" icon={Shield}>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {/* Color */}
+    <FormField
+      label="Color"
+      name="color"
+      value={product.color}
+      onChange={handleChange}
+    />
+    <FormField
+      label="لون"
+      name="color_ar"
+      value={product.color_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Gloss */}
+    <FormField
+      label="Gloss"
+      name="gloss"
+      value={product.gloss}
+      onChange={handleChange}
+    />
+    <FormField
+      label="لمعان"
+      name="gloss_ar"
+      value={product.gloss_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Volume Solids */}
+    <FormField
+      label="Volume Solids"
+      name="volume_solids"
+      value={product.volume_solids}
+      onChange={handleChange}
+    />
+    <FormField
+      label="المحتوى من المواد الصلبة"
+      name="volume_solids_ar"
+      value={product.volume_solids_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* VOC */}
+    <FormField
+      label="VOC"
+      name="voc"
+      value={product.voc}
+      onChange={handleChange}
+    />
+    <FormField
+      label="المحتوى من المركبات العضوية المتطايرة"
+      name="voc_ar"
+      value={product.voc_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Number of Coats */}
+    <FormField
+      label="Number of Coats"
+      name="number_of_coats"
+      value={product.number_of_coats}
+      onChange={handleChange}
+    />
+    <FormField
+      label="عدد أوجه الطلاء"
+      name="number_of_coats_ar"
+      value={product.number_of_coats_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Water Resistance */}
+    <FormField
+      label="Water Resistance"
+      name="water_resistance"
+      value={product.water_resistance}
+      onChange={handleChange}
+    />
+    <FormField
+      label="مقاومة الماء"
+      name="water_resistance_ar"
+      value={product.water_resistance_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Flexibility */}
+    <FormField
+      label="Flexibility"
+      name="flexibility"
+      value={product.flexibility}
+      onChange={handleChange}
+    />
+    <FormField
+      label="المرونة"
+      name="flexibility_ar"
+      value={product.flexibility_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Adhesion */}
+    <FormField
+      label="Adhesion"
+      name="adhesion"
+      value={product.adhesion}
+      onChange={handleChange}
+    />
+    <FormField
+      label="شدة الالتصاق"
+      name="adhesion_ar"
+      value={product.adhesion_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Washability */}
+    <FormField
+      label="Washability"
+      name="washability"
+      value={product.washability}
+      onChange={handleChange}
+    />
+    <FormField
+      label="قابلية الغسل"
+      name="washability_ar"
+      value={product.washability_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Abrasion Resistance */}
+    <FormField
+      label="Abrasion Resistance"
+      name="abrasion_resistance"
+      value={product.abrasion_resistance}
+      onChange={handleChange}
+    />
+    <FormField
+      label="مقاومة التآكل"
+      name="abrasion_resistance_ar"
+      value={product.abrasion_resistance_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Recommended Film Thickness */}
+    <FormField
+      label="Recommended Film Thickness"
+      name="recommended_film_thickness"
+      value={product.recommended_film_thickness}
+      onChange={handleChange}
+    />
+    <FormField
+      label="سماكة الفيلم المقترحة"
+      name="recommended_film_thickness_ar"
+      value={product.recommended_film_thickness_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Theoretical Spreading Rate */}
+    <FormField
+      label="Theoretical Spreading Rate"
+      name="theoretical_spreading_rate"
+      type="number"
+      value={product.theoretical_spreading_rate}
+      onChange={handleChange}
+    />
+    <FormField
+      label="معدل التغطية النظري"
+      name="theoretical_spreading_rate_ar"
+      type="number"
+      value={product.theoretical_spreading_rate_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Specific Gravity */}
+    <FormField
+      label="Specific Gravity"
+      name="specific_gravity"
+      value={product.specific_gravity}
+      onChange={handleChange}
+    />
+    <FormField
+      label="الكثافة بعد المزج"
+      name="specific_gravity_ar"
+      value={product.specific_gravity_ar}
+      onChange={handleChange}
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Surface Preparation */}
+    <FormField
+      label="Surface Preparation"
+      name="surface_preparation"
+      value={product.surface_preparation}
+      onChange={handleChange}
+      multiline
+    />
+    <FormField
+      label="تحضير السطح"
+      name="surface_preparation_ar"
+      value={product.surface_preparation_ar}
+      onChange={handleChange}
+      multiline
+      dir="rtl"
+      inputClassName="text-right"
+    />
+
+    {/* Application Fields */}
+    <FormField
+      label="Application Fields"
+      name="application_fields"
+      type="select"
+      value={product.application_fields}
+      onChange={handleChange}
+      required
+      options={applicationFields}
+    />
+    <div /> {/* Placeholder to keep grid alignment */}
+
+    {/* Surface Types */}
+    <FormField
+      label="Surface Types"
+      name="surface_types"
+      type="select"
+      value={product.surface_types}
+      onChange={handleChange}
+      required
+      options={surface_types}
+    />
+    <div /> {/* Placeholder to keep grid alignment */}
+  </div>
+</FormSection>
+
 
           <FormSection title="Storage & Safety" icon={Shield}>
-            <div className="space-y-6">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Languages className="h-5 w-5 text-blue-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    English
-                  </span>
-                </div>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <FormField
                       label="Dry to Touch"
                       name="dry_to_touch"
                       value={product.dry_to_touch}
                       onChange={handleChange}
                     />
+                     <FormField
+                      label="Dry to Touch (  الجفاف الأولي )"
+                      name="dry_to_touch_ar"
+                      value={product.dry_to_touch_ar}
+                      onChange={handleChange}
+                      dir="rtl"
+                    />
                     <FormField
                       label="Dry to Handle"
                       name="dry_to_handle"
                       value={product.dry_to_handle}
                       onChange={handleChange}
+                    />
+                     <FormField
+                      label="Dry to Handle ( الجفاف النهائي)"
+                      name="dry_to_handle_ar"
+                      value={product.dry_to_handle_ar}
+                      onChange={handleChange}
+                      dir="rtl"
                     />
                     <FormField
                       label="Dry to Topcoat"
@@ -878,16 +915,41 @@ export default function ProductForm() {
                       onChange={handleChange}
                     />
                     <FormField
+                      label="Dry to Topcoat (زمن الجفاف قبل طلاء وجه ناهي)"
+                      name="dry_to_topcoat_ar"
+                      value={product.dry_to_topcoat_ar}
+                      onChange={handleChange}
+                      dir="rtl"
+                    />
+                    <FormField
                       label="Complete Setting"
                       name="complete_setting"
                       value={product.complete_setting}
                       onChange={handleChange}
+                    />
+                      <FormField
+                      label="Complete Setting (التصلب التام )"
+                      name="complete_setting_ar"
+                      value={product.complete_setting_ar}
+                      onChange={handleChange}
+                      dir="rtl"
                     />
                     <FormField
                       label="Note"
                       name="note"
                       value={product.note}
                       onChange={handleChange}
+                      multiline
+                      rows={4}
+                    />
+                     <FormField
+                      label="Note (ملاحظة)"
+                      name="note_ar"
+                      value={product.note_ar}
+                      onChange={handleChange}
+                      dir="rtl"
+                      multiline
+                     rows={4}
                     />
                   </div>
                   <FormField
@@ -898,11 +960,27 @@ export default function ProductForm() {
                     multiline
                   />
                   <FormField
+                    label="Storage Conditions (ظروف التخزين)"
+                    name="storing_conditions_ar"
+                    value={product.storing_conditions_ar}
+                    onChange={handleChange}
+                    multiline
+                    dir="rtl"
+                  />
+                  <FormField
                     label="recommended_uses"
                     name="recommended_uses"
                     multiline
                     value={product.recommended_uses}
                     onChange={handleChange}
+                  />
+                  <FormField
+                    label="recommended_uses (نصائح للاستخدام)"
+                    name="recommended_uses_ar"
+                    multiline
+                    value={product.recommended_uses_ar}
+                    onChange={handleChange}
+                    dir="rtl"
                   />
 
                   <FormField
@@ -912,71 +990,7 @@ export default function ProductForm() {
                     onChange={handleChange}
                     multiline
                   />
-                </div>
-              </div>
-
-              <div className="pt-6 border-t">
-                <div className="flex items-center gap-2 mb-2">
-                  <Languages className="h-5 w-5 text-green-600" />
-                  <span className="text-sm font-medium text-gray-700">
-                    Arabic (العربية)
-                  </span>
-                </div>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      label="Dry to Touch (  الجفاف الأولي )"
-                      name="dry_to_touch_ar"
-                      value={product.dry_to_touch_ar}
-                      onChange={handleChange}
-                      dir="rtl"
-                    />
-                    <FormField
-                      label="Dry to Handle ( الجفاف النهائي)"
-                      name="dry_to_handle_ar"
-                      value={product.dry_to_handle_ar}
-                      onChange={handleChange}
-                      dir="rtl"
-                    />
-                    <FormField
-                      label="Dry to Topcoat (زمن الجفاف قبل طلاء وجه ناهي)"
-                      name="dry_to_topcoat_ar"
-                      value={product.dry_to_topcoat_ar}
-                      onChange={handleChange}
-                      dir="rtl"
-                    />
-                    <FormField
-                      label="Complete Setting (التصلب التام )"
-                      name="complete_setting_ar"
-                      value={product.complete_setting_ar}
-                      onChange={handleChange}
-                      dir="rtl"
-                    />
-                    <FormField
-                      label="Note"
-                      name="note_ar"
-                      value={product.note_ar}
-                      onChange={handleChange}
-                      dir="rtl"
-                    />
-                  </div>
-                  <FormField
-                    label="Storage Conditions (ظروف التخزين)"
-                    name="storing_conditions_ar"
-                    value={product.storing_conditions_ar}
-                    onChange={handleChange}
-                    multiline
-                    dir="rtl"
-                  />
-                  <FormField
-                    label="recommended_uses (..)"
-                    name="recommended_uses_ar"
-                    multiline
-                    value={product.recommended_uses_ar}
-                    onChange={handleChange}
-                    dir="rtl"
-                  />
-                  <FormField
+                   <FormField
                     label="Notice (ملاحظات)"
                     name="notice_ar"
                     value={product.notice_ar}
@@ -984,9 +998,7 @@ export default function ProductForm() {
                     multiline
                     dir="rtl"
                   />
-                </div>
-              </div>
-            </div>
+                   <div />
           </FormSection>
 
           <motion.button
