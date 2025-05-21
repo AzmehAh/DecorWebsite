@@ -189,7 +189,7 @@ export const ar = {
   footer: {
     importantPages: "صفحات مهمة",
     contact: "اتصل بنا",
-    tagline: "ثق بديكور لتجاوز توقعاتك",
+    tagline: "ثق بديكور لتتجاوز توقعاتك",
     phone: "٠٩٣٠٤٢٩٨٩٣",
     email: "info@decorpaints.co",
     address: "مقابل كلية الهندسة المعمارية، البرامكة، دمشق، سوريا",
