@@ -731,7 +731,7 @@ export default function ProductForm() {
 
     {/* Adhesion */}
     <FormField
-      label="Adhesion"
+      label="adhesion"
       name="adhesion"
       value={product.adhesion}
       onChange={handleChange}
@@ -855,7 +855,7 @@ export default function ProductForm() {
       required
       options={applicationFields}
     />
-<div className="invisible" />
+    <div /> {/* Placeholder to keep grid alignment */}
 
     {/* Surface Types */}
     <FormField
@@ -867,7 +867,7 @@ export default function ProductForm() {
       required
       options={surface_types}
     />
-<div className="invisible" />
+    <div /> {/* Placeholder to keep grid alignment */}
   </div>
 </FormSection>
 
