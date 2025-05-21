@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactMarkdown from 'react-markdown';
 import {
   ChevronLeft,
   ChevronDown,
@@ -601,7 +600,7 @@ export default function ProductDetailsNew() {
                           </h4>
                           <div className="text-gray-600 space-y-1">
                          {product.surface_preparation.split("\n").map((line, index) => (
-                        <ReactMarkdown className="prose" key={index}>{line}</ReactMarkdown>
+                        <p key={index}>{line}</p>
                               ))}
                                </div>
                             </div>
