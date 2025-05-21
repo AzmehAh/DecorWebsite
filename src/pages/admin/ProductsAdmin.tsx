@@ -20,18 +20,20 @@ export default function ProductsAdmin() {
   }, []);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (!session) {
-      navigate('/login');
+      navigate("/login");
     }
   };
 
   const fetchProducts = async () => {
     try {
       const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setProducts(data || []);
@@ -43,21 +45,36 @@ export default function ProductsAdmin() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     setDeleteId(id);
     try {
-      const { error } = await supabase
-        .from('products')
-        .delete()
-        .eq('id', id);
+      const { error } = await supabase.from("products").delete().eq("id", id);
 
       if (error) throw error;
-      setProducts(products.filter(p => p.id !== id));
+      setProducts(products.filter((p) => p.id !== id));
     } catch (err: any) {
       setError(err.message);
     } finally {
       setDeleteId(null);
+    }
+  };
+
+  // دالة تغيير حالة الـ is_featured
+  const toggleFeatured = async (id: string, current: boolean) => {
+    try {
+      const { error } = await supabase
+        .from("products")
+        .update({ is_featured: !current })
+        .eq("id", id);
+
+      if (error) throw error;
+
+      setProducts((prev) =>
+        prev.map((p) => (p.id === id ? { ...p, is_featured: !current } : p))
+      );
+    } catch (err: any) {
+      setError(err.message);
     }
   };
 
@@ -77,7 +94,7 @@ export default function ProductsAdmin() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => navigate('/admin/products/new')}
+            onClick={() => navigate("/admin/products/new")}
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
           >
             <Plus className="h-5 w-5 mr-2" />
@@ -123,6 +140,17 @@ export default function ProductsAdmin() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
+                  {/* checkbox is_featured */}
+                  <label className="flex items-center space-x-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={product.is_featured || false}
+                      onChange={() => toggleFeatured(product.id, product.is_featured || false)}
+                      className="form-checkbox h-5 w-5 text-blue-600"
+                    />
+                    <span className="text-sm text-gray-700">Featured</span>
+                  </label>
+
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
