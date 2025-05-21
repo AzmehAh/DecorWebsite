@@ -192,7 +192,10 @@ export const ar = {
     tagline: "ثق بديكور لتجاوز توقعاتك",
     phone: "٠٩٣٠٤٢٩٨٩٣",
     email: "info@decorpaint.com",
-    address: "برامكة",
+    address: "مقابل كلية الهندسة المعمارية، البرامكة، دمشق، سوريا
+
+
+",
     businessHours: "ساعات العمل",
     workingDays: "السبت - الخميس: ٩:٠٠ ص - ٥:٠٠ م",
     weekend: "الجمعة: مغلق",
