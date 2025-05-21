@@ -420,15 +420,6 @@ export default function ProductForm() {
         value={product.price}
         onChange={handleChange}
       />
-      <FormField
-        label="السعر"
-        name="price_ar"
-        type="number"
-        value={product.price_ar || ''}
-        onChange={handleChange}
-        dir="rtl"
-        inputClassName="text-right"
-      />
     </div>
 
     {/* الوصف */}
@@ -530,6 +521,7 @@ export default function ProductForm() {
           <FormSection title="Application Details" icon={Beaker}>
   <div className="space-y-6">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
       <FormField
         label="Method of Application"
         name="method_of_application"
