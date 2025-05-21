@@ -34,16 +34,17 @@ const sections: Section[] = [
   },
   {
     id: "application",
-    titleKey: "productDetails.applicationMethod",
+    titleKey: "productDetails.applicationinstruction",
     icon: Beaker,
   },
+  { id: "storage", titleKey: "productDetails.storage.conditions", icon: Clock },
   {
     id: "environmental",
-    titleKey: "productDetails.storage.title",
+    titleKey: "productDetails.storage.title", 
     icon: Droplet,
   },
-  { id: "storage", titleKey: "productDetails.storage.conditions", icon: Clock },
 ];
+
 
 export default function ProductDetailsNew() {
   const { t, language } = useLanguage();
@@ -279,7 +280,7 @@ export default function ProductDetailsNew() {
                     "https://ueaiiwmblxyqsflvnzir.supabase.co/storage/v1/object/public/image//decore4.jfif"
                   }
                   alt={product.name}
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-[400px] object-contain"
                 />
               </div>
             </div>
@@ -363,30 +364,7 @@ export default function ProductDetailsNew() {
                     <div className="bg-white  p-4  shadow-sm">
                       {section.id === "details" && (
                         <div className="space-y-4">
-                          <div className="grid md:grid-cols-2 gap-4">
-                            {product.color && (
-                              <div>
-                                <span className="font-medium">
-                                  {t("productDetails.color")}:
-                                </span>
-                                <span className="text-gray-600">
-                                  {" "}
-                                  {product.color}{" "}
-                                </span>
-                              </div>
-                            )}
-                            {product.gloss && (
-                              <div>
-                                <span className="font-medium">
-                                  {t("productDetails.gloss")}:
-                                </span>{" "}
-                                <span className="text-gray-600">
-                                  {" "}
-                                  {product.gloss}{" "}
-                                </span>
-                              </div>
-                            )}
-                          </div>
+                         
                           {product.recommended_uses && (
                             <div>
                               <span className="font-medium">
@@ -423,30 +401,31 @@ export default function ProductDetailsNew() {
 
                       {section.id === "specifications" && (
                         <div className="grid md:grid-cols-2 gap-4">
-                          {product.volume_solids && (
-                            <div>
-                              <span className="font-medium">
-                                {t("productDetails.technicalInfo.volumeSolids")}
-                                :
-                              </span>{" "}
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.volume_solids}{" "}
-                              </span>
-                            </div>
-                          )}
-                          {product.voc && (
-                            <div>
-                              <span className="font-medium">
-                                {t("productDetails.technicalInfo.voc")}:
-                              </span>
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.voc}
-                              </span>
-                            </div>
-                          )}
-                          {product.theoretical_spreading_rate && (
+
+                        
+                            {product.color && (
+                              <div>
+                                <span className="font-medium">
+                                  {t("productDetails.color")}:
+                                </span>
+                                <span className="text-gray-600">
+                                  {" "}
+                                  {product.color}{" "}
+                                </span>
+                              </div>
+                            )}
+                            {product.gloss && (
+                              <div>
+                                <span className="font-medium">
+                                  {t("productDetails.gloss")}:
+                                </span>{" "}
+                                <span className="text-gray-600">
+                                  {" "}
+                                  {product.gloss}{" "}
+                                </span>
+                              </div>
+                            )}
+                    {product.theoretical_spreading_rate && (
                             <div>
                               <span className="font-medium">
                                 {t(
@@ -458,8 +437,8 @@ export default function ProductDetailsNew() {
                                 {product.theoretical_spreading_rate} m²/L
                               </span>
                             </div>
-                          )}
-                          {product.number_of_coats && (
+                          )} 
+                            {product.number_of_coats && (
                             <div>
                               <span className="font-medium">
                                 {t(
@@ -473,55 +452,7 @@ export default function ProductDetailsNew() {
                               </span>
                             </div>
                           )}
-                          {product.flexibility && (
-                            <div>
-                              <span className="font-medium">
-                                {t("productDetails.technicalInfo.flexibility")}:
-                              </span>{" "}
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.flexibility} m²/L{" "}
-                              </span>
-                            </div>
-                          )}
-                          {product.adhesion && (
-                            <div>
-                              <span className="font-medium">
-                                {t("productDetails.technicalInfo.adhesion")}:
-                              </span>{" "}
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.adhesion} m²/L{" "}
-                              </span>
-                            </div>
-                          )}
-                          {product.washability && (
-                            <div>
-                              <span className="font-medium">
-                                {t("productDetails.technicalInfo.washability")}:
-                              </span>{" "}
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.washability}{" "}
-                              </span>
-                            </div>
-                          )}
-                          {product.abrasion_resistance && (
-                            <div>
-                              <span className="font-medium">
-                                {t(
-                                  "productDetails.technicalInfo.abrasionResistance",
-                                )}
-                                :
-                              </span>{" "}
-                              <span className="text-gray-600">
-                                {" "}
-                                {product.abrasion_resistance}{" "}
-                              </span>
-                            </div>
-                          )}
-
-                          {product.recommended_film_thickness && (
+                           {product.recommended_film_thickness && (
                             <div>
                               <span className="font-medium">
                                 {t(
@@ -535,7 +466,77 @@ export default function ProductDetailsNew() {
                               </span>
                             </div>
                           )}
-                          {product.specific_gravity && (
+                            {product.washability && (
+                            <div>
+                              <span className="font-medium">
+                                {t("productDetails.technicalInfo.washability")}:
+                              </span>{" "}
+                              <span className="text-gray-600">
+                                {" "}
+                                {product.washability}{" "}
+                              </span>
+                            </div>
+                          )}
+                           {product.flexibility && (
+                            <div>
+                              <span className="font-medium">
+                                {t("productDetails.technicalInfo.flexibility")}:
+                              </span>{" "}
+                              <span className="text-gray-600">
+                                {" "}
+                                {product.flexibility} m²/L{" "}
+                              </span>
+                            </div>
+                          )}
+                         
+                         {product.water_resistance && (
+                            <div>
+                              <span className="font-medium">
+                                {t(
+                                  "productDetails.technicalInfo.waterResistance",
+                                )}:
+                                  </span>{" "}
+                              
+                              <span className="text-gray-600">
+                                {product.water_resistance}
+                               </span>
+                            </div>
+                          )}
+                           {product.adhesion && (
+                            <div>
+                              <span className="font-medium">
+                                {t("productDetails.technicalInfo.adhesion")}:
+                              </span>{" "}
+                              <span className="text-gray-600">
+                                {" "}
+                                {product.adhesion} m²/L{" "}
+                              </span>
+                            </div>
+                          )}
+                           {product.volume_solids && (
+                            <div>
+                              <span className="font-medium">
+                                {t("productDetails.technicalInfo.volumeSolids")}
+                                :
+                              </span>{" "}
+                              <span className="text-gray-600">
+                                {" "}
+                                {product.volume_solids}{" "}
+                              </span>
+                            </div>
+                          )}
+                           {product.voc && (
+                            <div>
+                              <span className="font-medium">
+                                {t("productDetails.technicalInfo.voc")}:
+                              </span>
+                              <span className="text-gray-600">
+                                {" "}
+                                {product.voc}
+                              </span>
+                            </div>
+                          )}
+                             {product.specific_gravity && (
                             <div>
                               <span className="font-medium">
                                 {t(
@@ -548,7 +549,8 @@ export default function ProductDetailsNew() {
                                 {product.specific_gravity} m²/L{" "}
                               </span>
                             </div>
-                          )}
+                          )}        
+                         
                         </div>
                       )}
 
@@ -574,16 +576,7 @@ export default function ProductDetailsNew() {
                               </p>
                             </div>
                           )}
-                          {product.application_note && (
-                            <div>
-                              <h4 className="font-medium mb-1">
-                                {t("productDetails.applicationNote")}
-                              </h4>
-                              <p className="text-gray-600">
-                                {product.application_note}
-                              </p>
-                            </div>
-                          )}
+                         
                           {product.mixing && (
                             <div>
                               <h4 className="font-medium mb-1">
@@ -600,44 +593,90 @@ export default function ProductDetailsNew() {
                               <p className="text-gray-600">{product.thinner}</p>
                             </div>
                           )}
-                          {product.surface_preparation && (
-                            <div>
-                              <h4 className="font-medium mb-1">
-                                {t("productDetails.surfacePreparation")}
-                              </h4>
-                              <p className="text-gray-600">
-                                {product.surface_preparation}
-                              </p>
+                        {product.surface_preparation && (
+                         <div>
+                        <h4 className="font-medium mb-1">
+                        {t("productDetails.surfacePreparation")}
+                          </h4>
+                          <div className="text-gray-600 space-y-1">
+                         {product.surface_preparation.split("\n").map((line, index) => (
+                        <p key={index}>{line}</p>
+                              ))}
+                               </div>
                             </div>
-                          )}
-                        </div>
-                      )}
-
-                      {section.id === "environmental" && (
-                        <div className="space-y-4">
-                          {product.water_resistance && (
-                            <div>
-                              <h4 className="font-medium mb-1">
-                                {t(
-                                  "productDetails.technicalInfo.waterResistance",
                                 )}
+
+                           {product.application_note && (
+                            <div>
+                              <h4 className="font-medium mb-1">
+                                {t("productDetails.applicationNote")}
                               </h4>
                               <p className="text-gray-600">
-                                {product.water_resistance}
+                                {product.application_note}
                               </p>
                             </div>
                           )}
-                          {product.notice && (
+                          {product.dry_to_touch && (
                             <div>
                               <h4 className="font-medium mb-1">
-                                {t("productDetails.storage.notice")}
+                                {t("productDetails.dryingTime.title")}
                               </h4>
-                              <p className="text-gray-600">{product.notice}</p>
+                              <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                  <span className="font-medium">
+                                    {t("productDetails.dryingTime.touch")}:
+                                  </span>
+                                  <span className="text-gray-600">
+                                    {product.dry_to_touch}
+                                  </span>
+                                </div>
+                                {product.dry_to_handle && (
+                                  <div>
+                                    <span className="font-medium">
+                                      {t("productDetails.dryingTime.handle")}:
+                                    </span>
+                                    <span className="text-gray-600">
+                                      {product.dry_to_handle}
+                                    </span>
+                                  </div>
+                                )}
+                                {product.dry_to_topcoat && (
+                                  <div>
+                                    <span className="font-medium">
+                                      {t("productDetails.dryingTime.topcoat")}:
+                                    </span>
+                                    <span className="text-gray-600">
+                                      {product.dry_to_topcoat}
+                                    </span>
+                                  </div>
+                                )}
+                                {product.complete_setting && (
+                                  <div>
+                                    <span className="font-medium">
+                                      {t("productDetails.dryingTime.complete")}:
+                                    </span>
+                                    <span className="text-gray-600">
+                                      {product.complete_setting}
+                                    </span>
+                                  </div>
+                                )}
+                                {product.note && (
+                                  <div>
+                                    <span className="font-medium">
+                                      {t("productDetails.note")}:
+                                    </span>
+                                    <span className="text-gray-600">
+                                      {product.note}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           )}
                         </div>
                       )}
 
+                    
                       {section.id === "storage" && (
                         <div className="space-y-4">
                           {product.storing_conditions && (
@@ -656,69 +695,22 @@ export default function ProductDetailsNew() {
                               </div>
                             </div>
                           )}
-                          {product.dry_to_touch && (
+                     
+                          
+                        </div>
+                      )}
+                        {section.id === "environmental" && (
+                        <div className="space-y-4">
+                          
+                          {product.notice && (
                             <div>
-                              <h4 className="font-medium mb-1">
-                                {t("productDetails.dryingTime.title")}
-                              </h4>
-                              <div className="grid md:grid-cols-2 gap-4">
-                                <div>
-                                  <span className="font-medium">
-                                    {t("productDetails.dryingTime.touch")}{": "}
-                                  </span>
-                                  <span className="text-gray-600">
-                                    {product.dry_to_touch}
-                                  </span>
-                                </div>
-                                {product.dry_to_handle && (
-                                  <div>
-                                    <span className="font-medium">
-                                      {t("productDetails.dryingTime.handle")}{": "}
-                                    </span>
-                                    <span className="text-gray-600">
-                                      {product.dry_to_handle}
-                                    </span>
-                                  </div>
-                                )}
-                                {product.dry_to_topcoat && (
-                                  <div>
-                                    <span className="font-medium">
-                                      {t("productDetails.dryingTime.topcoat")}
-                                      {": "}
-                                    </span>
-                                    <span className="text-gray-600">
-                                      {product.dry_to_topcoat}
-                                    </span>
-                                  </div>
-                                )}
-                                {product.complete_setting && (
-                                  <div>
-                                    <span className="font-medium">
-                                      {t("productDetails.dryingTime.complete")}
-                                      {": "}
-                                    </span>
-                                    <span className="text-gray-600">
-                                      {product.complete_setting}
-                                    </span>
-                                  </div>
-                                )}
-                                {product.note && (
-                                  <div>
-                                    <span className="font-medium">
-                                      {t("productDetails.note")}
-                                      {": "}
-                                    </span>
-                                    <span className="text-gray-600">
-                                      {" "}
-                                      {product.note}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
+                              
+                              <p className="text-gray-600">{product.notice}</p>
                             </div>
                           )}
                         </div>
                       )}
+
                     </div>
                   </motion.div>
                 )}
