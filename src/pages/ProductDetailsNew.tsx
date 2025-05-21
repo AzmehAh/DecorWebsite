@@ -621,7 +621,7 @@ export default function ProductDetailsNew() {
                               <h4 className="font-medium mb-1">
                                 {t("productDetails.dryingTime.title")}
                               </h4>
-                              <div className="grid md:grid-cols-2 gap-4">
+                              <div className="grid md:grid-cols-2 gap-4 mb-1">
                                 <div>
                                   <span className="font-medium">
                                     {t("productDetails.dryingTime.touch")}{": "}
