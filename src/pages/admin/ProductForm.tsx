@@ -855,7 +855,7 @@ export default function ProductForm() {
       required
       options={applicationFields}
     />
-    <div /> {/* Placeholder to keep grid alignment */}
+<div className="invisible" />
 
     {/* Surface Types */}
     <FormField
@@ -867,7 +867,7 @@ export default function ProductForm() {
       required
       options={surface_types}
     />
-    <div /> {/* Placeholder to keep grid alignment */}
+<div className="invisible" />
   </div>
 </FormSection>
 
