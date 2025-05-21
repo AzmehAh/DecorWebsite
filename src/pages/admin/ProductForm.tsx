@@ -420,15 +420,6 @@ export default function ProductForm() {
         value={product.price}
         onChange={handleChange}
       />
-      <FormField
-        label="السعر"
-        name="price_ar"
-        type="number"
-        value={product.price_ar || ''}
-        onChange={handleChange}
-        dir="rtl"
-        inputClassName="text-right"
-      />
     </div>
 
     {/* الوصف */}
