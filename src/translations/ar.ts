@@ -191,7 +191,7 @@ export const ar = {
     contact: "اتصل بنا",
     tagline: "ثق بديكور لتجاوز توقعاتك",
     phone: "٠٩٣٠٤٢٩٨٩٣",
-    email: "info@decorpaint.com",
+    email: "info@decorpaints.co",
     address: "مقابل كلية الهندسة المعمارية، البرامكة، دمشق، سوريا",
     businessHours: "ساعات العمل",
     workingDays: "السبت - الخميس: ٩:٠٠ ص - ٥:٠٠ م",
