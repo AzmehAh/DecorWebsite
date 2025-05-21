@@ -601,7 +601,7 @@ export default function ProductDetailsNew() {
                           </h4>
                           <div className="text-gray-600 space-y-1">
                          {product.surface_preparation.split("\n").map((line, index) => (
-                        <ReactMarkdown className="prose"> key={index}>{line}</ReactMarkdown>
+                        <<ReactMarkdown className="prose" key={index}>{line}</ReactMarkdown>
                               ))}
                                </div>
                             </div>
