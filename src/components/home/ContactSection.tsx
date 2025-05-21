@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  Phone,
-  Mail,
-  Facebook,
-  Twitter,
-  Instagram,
-  MessageSquare,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
+import emailjs from "@emailjs/browser";
 
 interface FormData {
   name: string;
@@ -28,12 +21,36 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
+
+    emailjs
+      .send(
+        "service_djnnl1c",
+        "template_lams4je",     
+        templateParams,
+        "6U867S8Fp0svP3LJg"       
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          alert(t("contact.successMessage")); 
+          setFormData({ name: "", email: "", phone: "", message: "" });
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          alert(t("contact.errorMessage")); 
+        }
+      );
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -42,7 +59,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact-section" className="py-32 ">
+    <section id="contact-section" className="py-32">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
@@ -59,10 +76,7 @@ export default function ContactSection() {
           >
             <div className="space-y-6">
               <div className="space-y-4">
-                <label
-                  htmlFor="name"
-                  className="block text-gray-700 font-medium mb-2"
-                >
+                <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
                   {t("contact.name")}
                 </label>
                 <input
@@ -76,10 +90,7 @@ export default function ContactSection() {
                   placeholder={t("contact.namePlaceholder")}
                 />
 
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-medium mb-2"
-                >
+                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
                   {t("contact.email")}
                 </label>
                 <input
@@ -93,10 +104,7 @@ export default function ContactSection() {
                   placeholder={t("contact.emailPlaceholder")}
                 />
 
-                <label
-                  htmlFor="phone"
-                  className="block text-gray-700 font-medium mb-2 mt-4"
-                >
+                <label htmlFor="phone" className="block text-gray-700 font-medium mb-2 mt-4">
                   {t("contact.phone")}
                 </label>
                 <input
@@ -109,10 +117,7 @@ export default function ContactSection() {
                   placeholder={t("contact.phonePlaceholder")}
                 />
 
-                <label
-                  htmlFor="message"
-                  className="block text-gray-700 font-medium mb-2 mt-4"
-                >
+                <label htmlFor="message" className="block text-gray-700 font-medium mb-2 mt-4">
                   {t("contact.message")}
                 </label>
                 <textarea
