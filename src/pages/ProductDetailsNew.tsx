@@ -661,7 +661,7 @@ export default function ProductDetailsNew() {
                                   </div>
                                 )}
                               </div>
-                                                              {product.note && (
+                                  {product.note && (
                                   <div>
                                     <span className="font-medium">
                                       {t("productDetails.note")}{": "}
