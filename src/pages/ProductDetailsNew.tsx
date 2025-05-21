@@ -665,7 +665,7 @@ export default function ProductDetailsNew() {
                                     <span className="font-medium">
                                       {t("productDetails.note")}{": "}
                                     </span>
-                                    <span className="text-gray-600 space-y-1">
+                                    <span className="text-gray-600">
                                       {product.note}
                                     </span>
                                   </div>
