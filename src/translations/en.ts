@@ -195,7 +195,7 @@ export const en = {
     contact: "Contact",
     tagline: "Trust Décor to exceed your expectations",
     phone: "0930429893",
-    email: "info@decorpaint.com",
+    email: "info@decorpaints.co",
     address: "Opposite the Faculty of Architectural Engineering, Baramkeh, Damascus, Syria",
     businessHours: "Business Hours",
     workingDays: "Saturday - Thursday: 9:00 AM - 5:00 PM",
