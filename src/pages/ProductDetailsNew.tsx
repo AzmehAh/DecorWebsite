@@ -618,7 +618,7 @@ export default function ProductDetailsNew() {
                           )}
                           {product.dry_to_touch && (
                             <div>
-                              <h4 className="font-medium mb-1">
+                              <h4 className="font-medium mb-2">
                                 {t("productDetails.dryingTime.title")}
                               </h4>
                               <div className="grid md:grid-cols-2 gap-4 mb-1">
