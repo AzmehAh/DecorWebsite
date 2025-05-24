@@ -326,19 +326,16 @@ export default function ProductForm() {
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setProduct((prev) => ({
-      ...prev,
-      [name]: ["price", "theoretical_spreading_rate"].includes(name)
-        ? parseFloat(value) || 0
-        : value,
-    }));
-  };
+  const handleChange = (e: any) => {
+  const { name, value } = e.target ?? e;
+
+  setProduct((prev) => ({
+    ...prev,
+    [name]: ["price", "theoretical_spreading_rate"].includes(name)
+      ? parseFloat(value) || 0
+      : value,
+  }));
+};
 
   if (loading && isEditing) {
     return (
