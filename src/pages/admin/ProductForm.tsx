@@ -827,24 +827,58 @@ export default function ProductForm() {
       inputClassName="text-right"
     />
 
-    {/* Surface Preparation */}
-    <FormField
-      label="Surface Preparation"
-      name="surface_preparation"
-      value={product.surface_preparation}
-      onChange={handleChange}
-      multiline
-    />
-    <FormField
-      label="تحضير السطح"
-      name="surface_preparation_ar"
-      value={product.surface_preparation_ar}
-      onChange={handleChange}
-      multiline
-      dir="rtl"
-      inputClassName="text-right"
-    />
+   {/* Surface Preparation - English */}
+<div>
+  <label className="block mb-2 text-sm font-medium text-gray-700">
+    Surface Preparation
+  </label>
+  <ReactQuill
+    theme="snow"
+    value={product.surface_preparation}
+    onChange={(value) =>
+      handleChange({
+        target: { name: 'surface_preparation', value },
+      })
+    }
+    modules={{
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ align: [] }],
+        ['blockquote', 'code-block'],
+        ['clean'],
+      ],
+    }}
+    className="bg-white rounded-md"
+  />
+</div>
 
+{/* Surface Preparation - Arabic */}
+<div>
+  <label className="block mb-2 text-sm font-medium text-gray-700">
+    تحضير السطح
+  </label>
+  <ReactQuill
+    theme="snow"
+    value={product.surface_preparation_ar}
+    onChange={(value) =>
+      handleChange({
+        target: { name: 'surface_preparation_ar', value },
+      })
+    }
+    modules={{
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ align: [] }],
+        ['blockquote', 'code-block'],
+        ['clean'],
+      ],
+    }}
+    dir="rtl"
+    className="bg-white rounded-md text-right"
+  />
+</div>
     {/* Application Fields */}
     <FormField
       label="Application Fields"
