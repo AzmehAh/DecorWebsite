@@ -598,11 +598,12 @@ export default function ProductDetailsNew() {
                         <h4 className="font-medium mb-1">
                         {t("productDetails.surfacePreparation")}
                           </h4>
-                          <div className="text-gray-600 space-y-1">
-                         {product.surface_preparation.split("\n").map((line, index) => (
-                        <p key={index}>{line}</p>
-                              ))}
-                               </div>
+                         <div
+  className="text-gray-600 prose prose-li:marker:text-gray-500 prose-ol:pl-5 max-w-none"
+  dangerouslySetInnerHTML={{ __html: product.surface_preparation }}
+/>
+
+
                             </div>
                                 )}
 
@@ -684,15 +685,11 @@ export default function ProductDetailsNew() {
                               <h4 className="font-medium mb-1">
                                 {t("productDetails.storage.conditions")}
                               </h4>
-                              <div className="text-gray-600 whitespace-pre-line">
-                                {product.storing_conditions
-                                  .split("\n")
-                                  .map((line, index) => (
-                                    <p key={index} className="mb-0">
-                                      {line}
-                                    </p>
-                                  ))}
-                              </div>
+                              <div
+  className="text-gray-600 prose prose-li:marker:text-gray-500 prose-ol:pl-5 max-w-none"
+  dangerouslySetInnerHTML={{ __html: product.storing_conditions}}
+/>
+
                             </div>
                           )}
                      
