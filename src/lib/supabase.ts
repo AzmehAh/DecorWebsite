@@ -8,6 +8,18 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 console.log('Supabase URL:', supabaseUrl ? 'Connected' : 'Not connected');
 console.log('Supabase Key:', supabaseAnonKey ? 'Valid' : 'Invalid');
 
+// Custom fetch function to proxy through Vite dev server
+const customFetch = async (url: string, options: RequestInit = {}) => {
+  // Replace the database URL with the local proxy URL
+  const proxyUrl = url
+    .replace('https://49.13.63.120:8000', '/api/db')
+    .replace('http://49.13.63.120:8000', '/api/db');
+
+  console.log('Proxying request:', url, '->', proxyUrl);
+
+  return fetch(proxyUrl, options);
+};
+
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
@@ -17,7 +29,8 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   global: {
     headers: {
       'X-Client-Info': 'decor-paint-website'
-    }
+    },
+    fetch: customFetch
   },
   db: {
     schema: 'decor'

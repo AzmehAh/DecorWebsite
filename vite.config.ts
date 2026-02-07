@@ -49,5 +49,13 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+    proxy: {
+      '/api/db': {
+        target: 'http://49.13.63.120:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/db/, ''),
+        secure: false,
+      },
+    },
   },
 });
