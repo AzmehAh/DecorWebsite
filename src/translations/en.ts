@@ -148,6 +148,7 @@ export const en = {
   },
   products: {
     title: "Our Products",
+    searchPlaceholder: "Search products...",
     filters: {
       applicationFields: "Application Fields",
       surfaceTypes: "Surface Types",
@@ -160,13 +161,6 @@ export const en = {
       description:
         "Discover our comprehensive range of high-quality paint solutions for every need",
       viewAll: "View All Products",
-    },
-      searchPlaceholder: "Search products...",
-      filters: {
-      applicationFields: "Application Fields",
-      surfaceTypes: "Surface Types",
-      colors: "Colors",
-      gloss: "Gloss",
     },
     details: {
       specifications: "Technical Specifications",

@@ -144,6 +144,7 @@ export const ar = {
   },
   products: {
     title: "منتجاتنا",
+    searchPlaceholder: "البحث عن المنتجات...",
     filters: {
       applicationFields: "مجالات التطبيق",
       surfaceTypes: "أنواع الأسطح",
@@ -156,13 +157,6 @@ export const ar = {
       description:
         "اكتشف مجموعتنا الشاملة من حلول الدهانات عالية الجودة لكل احتياجاتك",
       viewAll: "عرض جميع المنتجات",
-    },
-    searchPlaceholder: "البحث عن المنتجات...",
-    filters: {
-      applicationFields: "مجالات التطبيق",
-      surfaceTypes: "أنواع الأسطح",
-      colors: "الألوان",
-      gloss: "اللمعان",
     },
     details: {
       specifications: "المواصفات الفنية",

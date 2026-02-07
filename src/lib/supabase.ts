@@ -8,16 +8,17 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 console.log('Supabase URL:', supabaseUrl ? 'Connected' : 'Not connected');
 console.log('Supabase Key:', supabaseAnonKey ? 'Valid' : 'Invalid');
 
-// Custom fetch function to proxy through Vite dev server
+// Custom fetch function to proxy through Vite dev server in development
 const customFetch = async (url: string, options: RequestInit = {}) => {
-  // Replace the database URL with the local proxy URL
-  const proxyUrl = url
-    .replace('https://49.13.63.120:8000', '/api/db')
-    .replace('http://49.13.63.120:8000', '/api/db');
+  // In development, proxy through Vite dev server to avoid CORS issues
+  if (import.meta.env.DEV) {
+    const proxyUrl = url.replace('http://49.13.63.120:8000', '/api/db');
+    console.log('Proxying request:', url, '->', proxyUrl);
+    return fetch(proxyUrl, options);
+  }
 
-  console.log('Proxying request:', url, '->', proxyUrl);
-
-  return fetch(proxyUrl, options);
+  // In production, connect directly to VPS
+  return fetch(url, options);
 };
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
@@ -25,6 +26,9 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true
+  },
+  db: {
+    schema: 'decor'
   },
   global: {
     headers: {
