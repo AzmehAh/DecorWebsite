@@ -31,9 +31,6 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
       'X-Client-Info': 'decor-paint-website'
     },
     fetch: customFetch
-  },
-  db: {
-    schema: 'decor'
   }
 });
 
